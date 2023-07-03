@@ -6,6 +6,8 @@
 #include <lely/io2/sys/timer.hpp>
 #include <lely/coapp/master.hpp>
 
+#include "WsServer.h"
+
 using namespace lely;
 
 int main() {
@@ -38,6 +40,9 @@ int main() {
   // task on the event loop, instead of being invoked during the event
   // processing by the stack.
   canopen::AsyncMaster master(timer, chan, "master.dcf", "", 1);
+
+  arista::WsServer server;
+  server.init(8765);
 
   // Create a signal handler.
   io::SignalSet sigset(poll, exec);
