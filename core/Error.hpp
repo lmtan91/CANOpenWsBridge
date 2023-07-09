@@ -1,7 +1,7 @@
 #ifndef ARISTA_ERROR_H
 #define ARISTA_ERROR_H
 
-#include "Util.hpp"
+#include "Core.hpp"
 
 #include <chrono>
 #include <string>

@@ -6,7 +6,7 @@
 #include <lely/io2/sys/timer.hpp>
 #include <lely/coapp/master.hpp>
 
-#include "WsServer.h"
+#include "WsServerLws.hpp"
 
 using namespace lely;
 
@@ -41,8 +41,21 @@ int main() {
   // processing by the stack.
   canopen::AsyncMaster master(timer, chan, "master.dcf", "", 1);
 
-  arista::WsServer server;
+  arista::WsServerLws server;
   server.init(8765);
+
+  server.handle(arista::HttpMethod::Get, "echo", [](arista::WsServerClient& client, const arista::HttpRequest& request) { arista::printInfo("http handler!!"); });
+
+  server.handleWebSocket("/echo", [](arista::WsServerClient& client) {
+      arista::printInfo("websocket handler!!");
+
+      client.registerMessageHandler([&client](const arista::LwsPacket& message) {
+          std::string body(reinterpret_cast<char*>(message.payload->data()), message.payload->size());
+          arista::printInfo("My message: {}", body);
+          client.send(message);
+      });
+
+  });
 
   // Create a signal handler.
   io::SignalSet sigset(poll, exec);

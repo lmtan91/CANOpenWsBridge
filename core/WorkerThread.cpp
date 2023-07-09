@@ -1,7 +1,7 @@
+
 #include "WorkerThread.hpp"
 
-#include "Util.hpp"
-#include "Error.hpp"
+#include "Core.hpp"
 #include "CoreErrors.hpp"
 
 #include <chrono>
@@ -11,12 +11,6 @@
 namespace arista {
 
 using namespace std::literals::chrono_literals;
-
-template <typename F, typename... Args>
-decltype(auto) invoke(F&& f, Args&&... args)
-{
-    return std::forward<F>(f)(std::forward<Args>(args)...);
-}
 
 WorkerThread::WorkerThread(std::string name, arista::Thread::Priority priority)
     : m_name(std::move(name)), m_priority(priority)
@@ -94,7 +88,7 @@ void WorkerThread::exec(const std::function<void(void)>& repeatableWork)
             m_wakeUp = false;
         }
 
-        invoke(repeatableWork);
+        std::invoke(repeatableWork);
 
         noWait = m_skipWaitForNextCycle || m_wakeUp;
         m_skipWaitForNextCycle = false;

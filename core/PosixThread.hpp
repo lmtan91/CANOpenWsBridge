@@ -1,7 +1,7 @@
 #ifndef ARISTA_POSIX_THREAD_H
 #define ARISTA_POSIX_THREAD_H
 
-#include "Util.hpp"
+#include "Core.hpp"
 #include "Error.hpp"
 #include "Thread.hpp"
 

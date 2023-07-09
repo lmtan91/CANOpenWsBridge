@@ -23,7 +23,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
     set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -pedantic -Wl,--copy-dt-needed-entries")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Wextra -pedantic -Wl,--copy-dt-needed-entries")
 endif()
 
 # get git hash
@@ -40,7 +40,9 @@ configure_file(
     ${PROJECT_BINARY_DIR}/config.h
     )
 
-add_subdirectory(src)
+add_subdirectory(core)
+add_subdirectory(websockets)
+add_subdirectory(app)
 
 # set cdash buildname
 set(BUILDNAME

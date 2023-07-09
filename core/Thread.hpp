@@ -1,7 +1,7 @@
 #ifndef ARISTA_THREAD_H
 #define ARISTA_THREAD_H
 
-#include "Util.hpp"
+#include "Core.hpp"
 #include "Error.hpp"
 
 #include <optional>

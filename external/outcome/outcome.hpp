@@ -1517,7 +1517,6 @@ template <class T> using in_place_type_t = std::in_place_type_t<T>;
 using std::in_place_type;
 OUTCOME_V2_NAMESPACE_END
 #else
-#include <utility>
 OUTCOME_V2_NAMESPACE_BEGIN
 //! Aliases `std::in_place_type_t<T>` if on C++ 17 or later, else defined locally.
 template <class T> struct in_place_type_t
